@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+@{
+    string controller =
+        ViewContext.RouteData.Values["controller"].ToString();
+    string action =
+        ViewContext.RouteData.Values["action"].ToString();
+}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"] - Calorie Calculator</title>
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/popper.js/popper.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery-validation/dist
+        jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/
+        jquery.validate.unobtrusive.min.js"></script>
+
+</head>
+
+
+<header>
+
+    <div>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top ">
+
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <nav class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-link @(controller == "Home" && action == "Index" ? "active" : "")"
+                       asp-controller="Home" asp-action="Index">Home</a>
+                    <a class="nav-link @(controller == "User" && action == "UserHome" ? "active" : "")"
+                       asp-controller="User" asp-action="UserHome" asp-route-id="@ViewBag.UserId">User Data</a>
+                    <a class="nav-link @(controller == "User" && action == "AddUserFood" ? "active" : "")"
+                       asp-controller="User" asp-action="AddUserFood" asp-route-id="@ViewBag.UserId">Add Food</a>
+                    <a class="nav-link @(controller == "User" && action == "AddUserExercise" ? "active" : "")"
+                       asp-controller="User" asp-action="AddUserExercise" asp-route-id="@ViewBag.UserId">Add Exercise</a>
+                </div>
+                <div class="navbar-nav navbar-right">
+                    <a class="nav-link"
+                       asp-area="Admin" asp-controller="Home" asp-action="Admin">Admin</a>
+                </div>
+            </nav>
+
+        </nav>
+
+    </div>
+
+
+</header>
+
+
+<center>
+
+    <div class="align-self-center p-4">
+        <header class="jumbotron d-flex justify-content-md-center w-100 mh-100">
+            <img id="food" alt="Food"
+                 src="~/images/food.png"
+                 class="img-fluid d-flex w-25 h-25" />
+
+            <h1 class="font-weight-bold p-5 h1 align-bottom">@ViewBag.Title</h1>
+
+        </header>
+    </div>
+
+</center>
+
+
+<body>
+
+
+
+
+    @RenderBody()
+
+</body>
+
+</html>

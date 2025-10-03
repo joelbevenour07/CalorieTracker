@@ -1,0 +1,54 @@
+﻿@model User
+@{
+    string title = ViewBag.Action + " User";
+    ViewBag.Title = title;
+}
+<h2>@ViewBag.Title</h2>
+<form asp-action="Update" method="post">
+
+    <div class="form-group">
+        <label asp-for="UserName" class="text-dark font-weight-bold">Name</label>
+        <input asp-for="UserName" class="form-control">
+        <span asp-validation-for="UserName" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Age" class="text-dark font-weight-bold">Age</label>
+        <input asp-for="Age" class="form-control">
+        <span asp-validation-for="Age" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UserHeight" class="text-dark font-weight-bold">Height (cm)</label>
+        <input asp-for="UserHeight" class="form-control">
+        <span asp-validation-for="UserHeight" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="UserWeight" class="text-dark font-weight-bold">Weight (kg)</label>
+        <input asp-for="UserWeight" class="form-control">
+        <span asp-validation-for="UserWeight" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Gender" class="text-dark font-weight-bold">Gender (M/F)</label>
+        <select asp-for="Gender" class="form-control">
+            <option>select a gender</option>
+            <option value='M'>Male</option>
+            <option value='F'>Female</option>
+        </select>
+        <span asp-validation-for="Gender" class="col text-danger"></span>
+    </div>
+
+
+
+
+    <input type="hidden" asp-for="UserId" />
+    <button type="submit" class="btn btn-primary">
+        @ViewBag.Action
+    </button>
+
+
+    <a asp-action="List"
+       class="btn btn-primary">Cancel</a>
+</form>

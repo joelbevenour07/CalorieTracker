@@ -1,0 +1,199 @@
+﻿@model ExerciseView
+@{
+    ViewData["Title"] = @ViewBag.UserName + "'s Exercise Chart";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<center>
+
+    <head class="align-content-center container">
+
+    </head>
+
+</center>
+
+
+<center>
+
+
+
+    <body>
+
+        <div class="p-3">
+            <button id="addbutton" class="btn rounded p-2 btn-light">
+                <a asp-controller="User" asp-action="Add" asp-route-id="@ViewBag.UserId" asp-route-Weight="@ViewBag.UserWeight" asp-route-Age="@ViewBag.UserAge" asp-route-Gender="@ViewBag.UserGender" class="font-weight-bold p-1">Add New Exercise</a>
+            </button>
+        </div>
+
+        <h2>Exercise List</h2>
+        <div class="col-sm-9">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Exercise</th>
+                        <th>Calories burnt</th>
+                        <th>Duration (minutes)</th>
+                        <th>Average Heart rate</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Exercise exercise in Model.exercises)
+
+                    {
+
+
+                            if (exercise.UserId == ViewBag.UserId){
+
+                                <tr>
+                                    <td>@exercise.ExerciseName</td>
+
+                                    <td>@exercise.CalBurned.ToString("N2") kCals</td>
+
+                                    <td>@exercise.Duration minutes</td>
+
+                                    <td>@exercise.HeartRate BPM</td>
+
+                                    <td>
+                                        <div class="p-1">
+                                            <button id="deletebutton" class="btn btn-block alert-danger">
+                                                <a asp-action="DeleteUserExercise" class="font-weight-bolder"
+                                           asp-route-id="@exercise.ExerciseId">Delete</a>
+                                            </button>
+                                        </div>
+                                    
+
+                                        <div class="p-1">
+                                            <button id="editbutton" class="btn btn-block alert-info">
+                                                <a asp-action="Update" class="font-weight-bolder"
+                                       asp-route-exerciseid="@exercise.ExerciseId" asp-route-Weight="@ViewBag.UserWeight" asp-route-Age="@ViewBag.UserAge" asp-route-Gender="@ViewBag.UserGender">
+                                                    Edit
+                                                </a>
+                                            </button>
+                                        </div>
+                        
+                                    </td>
+
+                                </tr>
+                            }
+                            
+                    }
+                        
+                    
+
+
+                </tbody>
+            </table>
+        </div>
+
+        <h2>User Data</h2>
+
+        <div class="container">
+            <div class="col-lg-15">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Weight (Kg)</th>
+                            <th>Height (Cm)</th>
+                            <th>Gender (M/F)</th>
+                            <th>Calories Required (kCals)</th>
+                            <th>Fat Required (grams)</th>
+                            <th>Carbs Required (grams)</th>
+                            <th>Protein Required (grams)</th>
+                            <th>Sodium Required (mg)</th>
+                            <th>Cholesterol Required (mg)</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+
+                            <td>@ViewBag.UserName</td>
+                            <td>@ViewBag.UserAge</td>
+                            <td>@ViewBag.UserWeight</td>
+                            <td>@ViewBag.UserHeight</td>
+                            <td>@ViewBag.UserGender</td>
+
+                            @if (ViewBag.UserCalReq >= 0)
+                            {
+                                <td>@ViewBag.UserCalReq.ToString("N2")</td>
+                            }
+                            @if (ViewBag.UserCalReq < 0)
+                            {
+                                <td>0  (@Math.Abs(ViewBag.UserCalReq).ToString("N2") Calorie surplus)</td>
+                            }
+
+
+                            @if (ViewBag.UserFatReq >= 0)
+                            {
+                                <td>@ViewBag.UserFatReq.ToString("N2")</td>
+                            }
+                            @if (ViewBag.UserFatReq < 0)
+                            {
+                                <td>0  (@Math.Abs(ViewBag.UserFatReq).ToString("N2") gram surplus)</td>
+                            }
+
+                            @if (ViewBag.UserCarbReq >= 0)
+                            {
+                                <td>@ViewBag.UserCarbReq.ToString("N2")</td>
+                            }
+                            @if (ViewBag.UserCarbReq < 0)
+                            {
+                                <td>0  (@Math.Abs(ViewBag.UserCarbReq).ToString("N2") gram surplus)</td>
+                            }
+
+
+                            @if (ViewBag.UserProteinReq >= 0)
+                            {
+                                <td>@ViewBag.UserProteinReq.ToString("N2")</td>
+                            }
+                            @if (ViewBag.UserProteinReq < 0)
+                            {
+                                <td>0  (@Math.Abs(ViewBag.UserProteinReq).ToString("N2") gram surplus)</td>
+                            }
+
+
+                            @if (ViewBag.UserSodiumReq >= 0)
+                            {
+                                <td>@ViewBag.UserSodiumReq.ToString("N2")</td>
+                            }
+                            @if (ViewBag.UserSodiumReq < 0)
+                            {
+                                <td>0  (@Math.Abs(ViewBag.UserSodiumReq).ToString("N2") mg surplus)</td>
+                            }
+
+                            @if (ViewBag.UserChReq >= 0)
+                            {
+                                <td>@ViewBag.UserChReq.ToString("N2")</td>
+                            }
+                            @if (ViewBag.UserChReq < 0)
+                            {
+                                <td>0  (@Math.Abs(ViewBag.UserChReq).ToString("N2") mg surplus)</td>
+                            }
+
+                        </tr>
+
+
+
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+    </body>
+
+
+</center>
+
+</html>

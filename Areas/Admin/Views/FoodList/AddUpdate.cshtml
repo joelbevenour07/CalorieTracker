@@ -1,0 +1,77 @@
+﻿@model Food
+@{
+    string title = ViewBag.Action + " Food";
+    ViewBag.Title = title;
+}
+<h2>@ViewBag.Title</h2>
+<form asp-action="Update" method="post">
+
+    <div class="form-group">
+        <label asp-for="Name" class="text-dark font-weight-bold">Name</label>
+        <input asp-for="Name" class="form-control">
+        <span asp-validation-for="Name" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Calories" class="text-dark font-weight-bold">Calories</label>
+        <input asp-for="Calories" class="form-control">
+        <span asp-validation-for="Calories" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FoodServing" class="text-dark font-weight-bold">Serving Size</label>
+        <input asp-for="FoodServing" class="form-control">
+        <span asp-validation-for="FoodServing" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Carbs" class="text-dark font-weight-bold">Carbs</label>
+        <input asp-for="Carbs" class="form-control">
+        <span asp-validation-for="Carbs" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Fats" class="text-dark font-weight-bold">Fats</label>
+        <input asp-for="Fats" class="form-control">
+        <span asp-validation-for="Fats" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Cholesterol" class="text-dark font-weight-bold">Cholesterol</label>
+        <input asp-for="Cholesterol" class="form-control">
+        <span asp-validation-for="Cholesterol" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Protein" class="text-dark font-weight-bold">Protein</label>
+        <input asp-for="Protein" class="form-control">
+        <span asp-validation-for="Protein" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Sodium" class="text-dark font-weight-bold">Sodium</label>
+        <input asp-for="Sodium" class="form-control">
+        <span asp-validation-for="Sodium" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MealId" class="text-dark font-weight-bold">Meal Type</label>
+        <select asp-for="MealId" class="form-control">
+            <option>select a meal</option>
+            <option value=1>Breakfast</option>
+            <option value=2>Lunch</option>
+            <option value=3>Dinner</option>
+            <option value=4>Snack</option>
+        </select>
+        <span asp-validation-for="MealId" class="col text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="FoodId" />
+    <button type="submit" class="btn btn-primary">
+        @ViewBag.Action
+    </button>
+
+
+    <a asp-action="List"
+       class="btn btn-primary">Cancel</a>
+</form>

@@ -1,0 +1,255 @@
+﻿@model UserFoods
+@{
+    ViewData["Title"] = @ViewBag.UserName + "'s Food Chart";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<center>
+
+    <head class="align-content-center container">
+
+    </head>
+
+</center>
+
+
+<center>
+
+
+
+<body>
+
+    <h2 class="font-weight-bold p-1 rounded-pill border-info">Food List</h2>
+    <div class="col-sm-9">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Food</th>
+                    <th>Calories</th>
+                    <th>Serving Size</th>
+                    <th>Carbohydrates</th>
+                    <th>Fats</th>
+                    <th>Cholesterol</th>
+                    <th>Protein</th>
+                    <th>Sodium</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Food food in Model.foods)
+
+                {
+                    <tr>
+                        <td>@food.Name</td>
+
+                        <td>@food.Calories kCals</td>
+
+                        <td>@food.FoodServing grams</td>
+
+                        <td>@food.Carbs grams</td>
+
+                        <td>@food.Fats grams</td>
+
+                        <td>@food.Cholesterol mg</td>
+
+                        <td>@food.Protein grams</td>
+
+                        <td>@food.Sodium mg</td>
+
+                        <td>
+                                <input type="hidden" asp-for="UserFoodId" />
+                                <button type="submit" class="btn btn-block alert-info">
+                                    <a class="font-weight-bolder" asp-controller="User" asp-action="AddToChosen" asp-route-userid="@ViewBag.UserId" asp-route-foodid="@food.FoodId">
+                                        Add Food
+                                    </a>
+
+                                </button>
+                           
+                        </td>
+                        
+                    </tr>
+                }
+
+                
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <h2>Chosen Foods</h2>
+    <div class="col-sm-9 p-3">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                        <th>Food</th>
+                        <th>Calories</th>
+                        <th>Serving Size</th>
+                        <th>Carbohydrates</th>
+                        <th>Fats</th>
+                        <th>Cholesterol</th>
+                        <th>Protein</th>
+                        <th>Sodium</th>
+                    
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (UserFoods userfoods in Model.userfoods)
+                {
+
+                    @foreach(Food food in Model.foods){
+
+                        if (userfoods.UserId == ViewBag.UserId)
+                        {
+                            if(food.FoodId == userfoods.FoodId){
+                                <tr>
+                                    <td>@food.Name</td>
+
+                                    <td>@food.Calories kCals</td>
+
+                                    <td>@food.FoodServing grams</td>
+
+                                    <td>@food.Carbs grams</td>
+
+                                    <td>@food.Fats grams</td>
+
+                                    <td>@food.Cholesterol mg</td>
+
+                                    <td>@food.Protein grams</td>
+
+                                    <td>@food.Sodium mg</td>
+
+                                    <td>
+                                            <button id="deletebutton" class="btn btn-block alert-danger">
+                                                <a asp-action="DeleteUserFood" class="font-weight-bolder"
+                                           asp-route-id="@userfoods.UserFoodId">Delete</a>
+                                        </button>
+                        
+                                    </td>
+                                </tr>
+                            }
+
+                            
+                        }
+                    }
+
+                    
+
+                }
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    <h2>User Data</h2>
+
+    <div class="container">
+       <div class="col-lg-15">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Weight (Kg)</th>
+                            <th>Height (Cm)</th>
+                            <th>Gender (M/F)</th>
+                            <th>Calories Required (kCals)</th>
+                            <th>Fat Required (grams)</th>
+                            <th>Carbs Required (grams)</th>
+                            <th>Protein Required (grams)</th>
+                            <th>Sodium Required (mg)</th>
+                            <th>Cholesterol Required (mg)</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+
+                            <td>@ViewBag.UserName</td>
+                            <td>@ViewBag.UserAge</td>
+                            <td>@ViewBag.UserWeight</td>
+                            <td>@ViewBag.UserHeight</td>
+                            <td>@ViewBag.UserGender</td>
+
+                            @if (ViewBag.UserCalReq >= 0)
+                            {
+                                <td>@ViewBag.UserCalReq.ToString("N2")</td>
+                            }
+                            @if (ViewBag.UserCalReq < 0)
+                            {
+                                <td>0  (@Math.Abs(ViewBag.UserCalReq).ToString("N2") Calorie surplus)</td>
+                            }
+
+
+                            @if (ViewBag.UserFatReq >= 0)
+                            {
+                                <td>@ViewBag.UserFatReq.ToString("N2")</td>
+                            }
+                            @if (ViewBag.UserFatReq < 0)
+                            {
+                                <td>0  (@Math.Abs(ViewBag.UserFatReq).ToString("N2") gram surplus)</td>
+                            }
+
+                            @if (ViewBag.UserCarbReq >= 0)
+                            {
+                                <td>@ViewBag.UserCarbReq.ToString("N2")</td>
+                            }
+                            @if (ViewBag.UserCarbReq < 0)
+                            {
+                                <td>0  (@Math.Abs(ViewBag.UserCarbReq).ToString("N2") gram surplus)</td>
+                            }
+
+
+                            @if (ViewBag.UserProteinReq >= 0)
+                            {
+                                <td>@ViewBag.UserProteinReq.ToString("N2")</td>
+                            }
+                            @if (ViewBag.UserProteinReq < 0)
+                            {
+                                <td>0  (@Math.Abs(ViewBag.UserProteinReq).ToString("N2") gram surplus)</td>
+                            }
+
+
+                            @if (ViewBag.UserSodiumReq >= 0)
+                            {
+                                <td>@ViewBag.UserSodiumReq.ToString("N2")</td>
+                            }
+                            @if (ViewBag.UserSodiumReq < 0)
+                            {
+                                <td>0  (@Math.Abs(ViewBag.UserSodiumReq).ToString("N2") mg surplus)</td>
+                            }
+
+                            @if (ViewBag.UserChReq >= 0)
+                            {
+                                <td>@ViewBag.UserChReq.ToString("N2")</td>
+                            }
+                            @if (ViewBag.UserChReq < 0)
+                            {
+                                <td>0  (@Math.Abs(ViewBag.UserChReq).ToString("N2") mg surplus)</td>
+                            }
+
+                        </tr>
+
+
+
+
+
+                    </tbody>
+                </table>
+        </div>
+    </div>
+
+
+
+</body>
+
+
+</center>
+
+</html>

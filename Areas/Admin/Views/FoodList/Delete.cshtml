@@ -1,0 +1,14 @@
+﻿@model Food
+@{
+    ViewBag.Title = "Delete Food";
+}
+<h2>Deletion</h2>
+<h3>@Model.Name (@Model.Calories)</h3>
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="FoodId" />
+    <button type="submit" class="btn btn-primary">
+        Delete
+    </button>
+    <a asp-action="List"
+       class="btn btn-primary">Cancel</a>
+</form>

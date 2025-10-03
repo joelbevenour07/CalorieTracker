@@ -1,0 +1,21 @@
+﻿@model UserFoods
+@{
+    ViewBag.Title = "Delete Food";
+}
+<h2>Deletion</h2>
+
+@foreach(Food food in Model.foods){
+    if(food.FoodId == ViewBag.FoodId){
+        <h3>@food.Name (@food.Calories kCals)</h3>
+        <form asp-action="DeleteUserFood" asp-route-id="@ViewBag.UserFoodId" method="post">
+            <input type="hidden" asp-for="UserFoodId"  />
+            <button type="submit" class="btn btn-primary">
+                Delete
+            </button>
+            <a asp-action="AddUserFood" asp-route-id="@ViewBag.UserId"
+       class="btn btn-primary">Cancel</a>
+        </form>
+    }
+    
+}
+

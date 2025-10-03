@@ -1,0 +1,68 @@
+﻿@model FoodUserListView
+@{
+    ViewBag.Title = "User List";
+}
+<center>
+
+
+
+    <center>
+
+        <form asp-action="Index" method="post">
+
+            <div class="col">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>User Names</th>
+                            <th>Age </th>
+                            <th>Height </th>
+                            <th>Weight </th>
+                            <th>Gender </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (User u in Model.users)
+                        {
+                            <tr>
+                                <td class="font-weight-bold">@u.UserName</td>
+                                <td class="font-weight-bold">@u.Age</td>
+                                <td class="font-weight-bold">@u.UserHeight cm</td>
+                                <td class="font-weight-bold">@u.UserWeight kg</td>
+                                <td class="font-weight-bold">@u.Gender</td>
+
+                                <td>
+
+
+                                    <div class="p-2">
+                                        <button id="editbutton" class="btn rounded alert-info p-2">
+                                            <a asp-controller="UserList" asp-action="Update" asp-route-id="@u.UserId" class="font-weight-bold p-1 ">Edit User Data</a>
+                                        </button>
+                                    </div>
+
+                                    <div class="p-2">
+                                        <button id="deletebutton" class="btn rounded alert-danger p-2">
+                                            <a asp-controller="UserList" asp-action="Delete" asp-route-id="@u.UserId" class="font-weight-bold p-1 ">Delete User</a>
+                                        </button>
+                                    </div>
+
+                                </td>
+
+
+                            </tr>
+                        }
+
+
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </form>
+
+
+
+    </center>
+
+</center>

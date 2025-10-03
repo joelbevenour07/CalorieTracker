@@ -1,0 +1,42 @@
+﻿@model Exercise
+@{
+    string title = ViewBag.Action + " Exercise";
+    ViewBag.Title = title;
+}
+<h2>@ViewBag.Title</h2>
+<form asp-action="Update" asp-route-Weight="@ViewBag.UserWeight" asp-route-Age="@ViewBag.UserAge" asp-route-Gender="@ViewBag.UserGender" asp-route-id="@ViewBag.UserId" method="post">
+
+    <div class="form-group">
+        <label asp-for="ExerciseName" class="text-dark font-weight-bold">Exercise Type</label>
+        <input asp-for="ExerciseName" class="form-control">
+        <span asp-validation-for="ExerciseName" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="HeartRate" class="text-dark font-weight-bold">Average Heartrate</label>
+        <input asp-for="HeartRate" class="form-control">
+        <span asp-validation-for="HeartRate" class="col text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Duration" class="text-dark font-weight-bold">Duration (minutes)</label>
+        <input asp-for="Duration" class="form-control">
+        <span asp-validation-for="Duration" class="col text-danger"></span>
+    </div>
+
+
+
+
+
+    <input type="hidden" asp-for="ExerciseId" />
+    <button type="submit" class="btn btn-primary">
+
+        @ViewBag.Action
+
+
+    </button>
+
+
+    <a asp-controller="User" asp-action="AddUserExercise" asp-route-id="@ViewBag.UserId"
+       class="btn btn-primary">Cancel</a>
+</form>

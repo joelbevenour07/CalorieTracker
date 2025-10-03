@@ -1,0 +1,122 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Calorie Calculator";
+    string controller =
+        ViewContext.RouteData.Values["controller"].ToString();
+    string action =
+        ViewContext.RouteData.Values["action"].ToString();
+}
+
+<!DOCTYPE html>
+
+<html>
+
+
+<header>
+
+    <div>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <nav class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-link
+                        @(controller == "Home" && action == "Index" ? "active" : "")"
+                       asp-controller="Home" asp-action="Index">Home</a>
+                </div>
+                <div class="navbar-nav navbar-right">
+                    <a class="nav-link"
+                       asp-area="Admin" asp-controller="Home" asp-action="Admin">Admin</a>
+                </div>
+            </nav>
+        </nav>
+
+    </div>
+
+
+</header>
+
+<center>
+
+    <head class="align-content-center container">
+
+        <h1 class="p-1 font-weight-bold">Welcome!</h1>
+        <p>
+            Please select your name, or if you are a new user add your user data.
+        </p>
+
+
+    </head>
+
+</center>
+
+
+<body>
+    <center>
+    
+        <form asp-action="Index" method="post">
+
+            <div class="col">
+                <div class="p-3">
+                    <button id="addbutton" class="btn rounded p-2 btn-light">
+                        <a asp-controller="Home" asp-action="Add" class="font-weight-bold p-1">Add New User</a>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>User Names</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (User u in ViewBag.Users)
+                            {
+                                <tr>
+                                    <td class="font-weight-bold">@u.UserName</td>
+
+
+                                    <td>
+
+
+                                        <div>
+                                            <input type="hidden" asp-for="UserId" />
+                                            <button type="submit" class="btn btn-block ">
+                                                <a class="font-weight-bolder" id="loginlink" asp-controller="User" asp-action="UserHome" asp-route-id="@u.UserId">
+                                                    Login
+                                                </a>
+
+                                            </button>
+                                        </div>
+
+
+
+                                    </td>
+
+
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+                    </table>
+            </div>
+
+            
+        </form>
+        
+
+
+    </center>
+</body>
+
+</html>

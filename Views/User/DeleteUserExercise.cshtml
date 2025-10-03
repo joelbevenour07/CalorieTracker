@@ -1,0 +1,17 @@
+﻿@model Exercise
+@{
+    ViewBag.Title = "Delete Exercise";
+}
+<h2>Deletion</h2>
+
+        <h3>@ViewBag.ExerciseName (@ViewBag.ExerciseCals.ToString("N2") kCals Burned)</h3>
+        <form asp-action="DeleteUserExercise" asp-route-id="@ViewBag.ExerciseId" method="post">
+            <input type="hidden" asp-for="ExerciseId" />
+            <button type="submit" class="btn btn-primary">
+                Delete
+            </button>
+            <a asp-action="AddUserExercise" asp-route-id="@ViewBag.UserId"
+       class="btn btn-primary">Cancel</a>
+        </form>
+
+

@@ -1,0 +1,84 @@
+﻿@model FoodUserListView
+@{
+    ViewBag.Title = "Food List";
+}
+
+<center>
+
+    <div class="col-sm-3">
+        <h3 class="mt-3">Meal Types</h3>
+        <div class="list-group">
+            @foreach (Meal meal in Model.meals)
+            {
+                <a asp-action="Foods"
+               asp-route-activeMealType="@meal.MealId"
+               class="list-group-item
+                               @Model.CheckActiveMealType(meal.MealType)">@meal.MealType</a>
+            }
+        </div>
+
+    <div class="p-2 col-sm-9">
+        <button id="addbutton" class="btn btn-block alert-info p-2">
+            <a asp-controller="FoodList" asp-action="Add" class="font-weight-bold p-1 ">Add New Food</a>
+        </button>
+    </div>
+    <div class="col-sm-9">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Food</th>
+                    <th>Calories</th>
+                    <th>Serving Size</th>
+                    <th>Carbohydrates</th>
+                    <th>Fats</th>
+                    <th>Cholesterol</th>
+                    <th>Protein</th>
+                    <th>Sodium</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Food food in Model.foods)
+
+                {
+                    <tr>
+                        <td>@food.Name</td>
+
+                        <td>@food.Calories kCals</td>
+
+                        <td>@food.FoodServing grams</td>
+
+                        <td>@food.Carbs grams</td>
+
+                        <td>@food.Fats grams</td>
+
+                        <td>@food.Cholesterol mg</td>
+
+                        <td>@food.Protein grams</td>
+
+                        <td>@food.Sodium mg</td>
+
+                        <td>
+                            <div class="p-2">
+                                <button id="editbutton" class="btn rounded alert-info p-2">
+                                    <a asp-controller="FoodList" asp-action="Update" asp-route-id="@food.FoodId" class="font-weight-bold p-1 ">Edit Food Data</a>
+                                </button>
+                            </div>
+                            <div class="p-1">
+                                <button id="deletebutton" class="btn btn-block alert-danger">
+                                    <a asp-action="Delete" class="font-weight-bolder"
+                                   asp-route-id="@food.FoodId">Delete</a>
+                                </button>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+</center>
+
+</div>
