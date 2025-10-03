@@ -69,4 +69,5 @@ A step-by-step series of examples that tell you how to get a development environ
 
 - **Joel Bevenour** - *Backend/Frontend Development*
 - **John Campbell** - *Frontend Development*
-- **Krisvin Mathew** - *Fronend Development*
+- **Krisvin Mathew** - *Frontend Development*
+
