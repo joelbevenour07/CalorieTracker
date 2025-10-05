@@ -1,6 +1,6 @@
 # CalorieTracker
 
-This project aims to handle student registry and management process. This is an ASP.NET Core web app using Razor Pages, Bootstrap, jQuery, and validation libraries, managed with LibMan. This project also uses SQL Server LocalDB with Entity Framework Core migrations to host its database.
+This project aims to handle user nutritional tracking. This is an ASP.NET Core web app using Razor Pages, Bootstrap, jQuery, and validation libraries, managed with LibMan. This project also uses SQL Server LocalDB with Entity Framework Core migrations to host its database.
 
 ## Getting Started
 
@@ -70,4 +70,5 @@ A step-by-step series of examples that tell you how to get a development environ
 - **Joel Bevenour** - *Backend/Frontend Development*
 - **John Campbell** - *Frontend Development*
 - **Krisvin Mathew** - *Frontend Development*
+
 
