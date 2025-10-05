@@ -1,26 +1,27 @@
 ﻿using CalorieCalc.Models;
+using CalorieCalc.ViewModels;
 using System.Collections.Generic;
 
 namespace CalorieCalc.Models
 {
     public class FoodUserListView : MealTypeView
     {
-        public List<Food> foods { get; set; }
-
+        public List<FoodDto> Foods { get; set; }
         public List<User> users { get; set; }
 
-        public List<Meal> meals
+        private List<Meal> _meals;
+        public List<Meal> Meals
         {
-            get => meals;
+            get => _meals;
             set
             {
-                meals = value;
-                meals.Insert(0,
-                    new Meal { MealId = 5, MealType = "All" });
+                _meals = value;
+                _meals.Insert(0, new Meal { MealId = 0, MealType = "All" });
             }
         }
 
         public string CheckActiveMealType(string d) =>
-            d.ToLower() == ActiveMealType.ToLower() ? "active" : "";
+            d?.ToLower() == ActiveMealType?.ToLower() ? "active" : "";
     }
+
 }

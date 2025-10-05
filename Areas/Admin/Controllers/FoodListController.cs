@@ -1,8 +1,9 @@
 ﻿using CalorieCalc.Models;
-
+using CalorieCalc.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
+using System;
 
 namespace CalorieCalc.Areas.Admin.Controllers
 {
@@ -24,50 +25,87 @@ namespace CalorieCalc.Areas.Admin.Controllers
             return RedirectToAction("List");
         }
 
-
+        
         public IActionResult List(string activeMealType = "all")
-        {
-            var data = new FoodUserListView
             {
-                ActiveMealType = activeMealType,
-                meals = context.Meals.ToList(),
-                foods = context.Foods.ToList()
-                
-            };
+                // get all meals
+                var mealList = context.Meals.ToList();
 
-            IQueryable<Food> query = context.Foods;
-            if (activeMealType != "all")
-                query = query.Where(
-                    t => t.Meal.MealType.ToLower() == activeMealType.ToLower());
+                // base query
+                IQueryable<Food> query = context.Foods;
 
-            data.foods = query.ToList();
+                if (!string.Equals(activeMealType, "all", StringComparison.OrdinalIgnoreCase))
+                {
+                    query = query.Where(f => f.Meal.MealType.ToLower() == activeMealType.ToLower());
+                }
 
-            return View(data);
-        }
+                // project to DTOs
+                var foodDtos = query.Select(f => new FoodDto
+                {
+                    FoodId = f.FoodId,
+                    Name = f.Name,
+                    Calories = f.Calories,
+                    Carbs = f.Carbs,
+                    Fats = f.Fats,
+                    Cholesterol = f.Cholesterol,
+                    Protein = f.Protein,
+                    Sodium = f.Sodium,
+                    FoodServing = f.FoodServing,
+                    MealId = f.MealId,
+                    MealType = f.Meal.MealType
+                }).ToList();
+
+                var vm = new FoodUserListView
+                {
+                    ActiveMealType = activeMealType,
+                    Meals = mealList,
+                    Foods = foodDtos
+                    // Users = … set if needed
+                };
+
+                return View(vm);
+            }
 
         [HttpGet]
 
-        public IActionResult Foods(string activeMealType = "all")
-        {
+        // public IActionResult FoodFilter(string activeMealType = "all")
+        //     {
+        //         var mealList = context.Meals.ToList();
 
-            var data = new FoodUserListView
-            {
-                ActiveMealType = activeMealType,
-                meals = context.Meals.ToList(),
-                foods = context.Foods.ToList()
+        //         IQueryable<Food> query = context.Foods;
 
-            };
+        //         if (!string.Equals(activeMealType, "all", StringComparison.OrdinalIgnoreCase))
+        //         {
+        //             query = query.Where(f => f.Meal.MealType.ToLower() == activeMealType.ToLower());
+        //         }
 
-            IQueryable<Food> query = context.Foods;
-            if (activeMealType != "all")
-                query = query.Where(
-                    t => t.Meal.MealType.ToLower() == activeMealType.ToLower());
+        //         var foodList = query
+        //             .Select(f => new FoodDto
+        //             {
+        //                 FoodId = f.FoodId,
+        //                 Name = f.Name,
+        //                 Calories = f.Calories,
+        //                 Carbs = f.Carbs,
+        //                 Fats = f.Fats,
+        //                 Cholesterol = f.Cholesterol,
+        //                 Protein = f.Protein,
+        //                 Sodium = f.Sodium,
+        //                 FoodServing = f.FoodServing,
+        //                 MealId = f.MealId,
+        //                 MealType = f.Meal.MealType
+        //             })
+        //             .ToList();
 
-            data.foods = query.ToList();
+        //         var data = new FoodUserListView
+        //         {
+        //             ActiveMealType = activeMealType,
+        //             Meals = mealList,
+        //             Foods = foodList,
+        //             users = null
+        //         };
 
-            return View(data);
-
-        }
+        //         return View(data);
+        //     }
 
         [HttpGet]
         public IActionResult Add()

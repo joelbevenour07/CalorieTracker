@@ -40,31 +40,31 @@
 
     <div class="form-group">
         <label asp-for="UserName" class="text-dark font-weight-bold">Name</label>
-        <input asp-for="UserName" class="form-control">
-        <span asp-validation-for="UserName" class="col text-danger"></span>
+        <input asp-for="UserName" class="form-control" style="width: 200px">
+        <span asp-validation-for="UserName" class="col text-danger" style="width: 200px"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Age" class="text-dark font-weight-bold">Age</label>
-        <input asp-for="Age" class="form-control">
+        <input asp-for="Age" class="form-control" style="width: 200px">
         <span asp-validation-for="Age" class="col text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="UserHeight" class="text-dark font-weight-bold">Height (cm)</label>
-        <input asp-for="UserHeight" class="form-control">
+        <input asp-for="UserHeight" class="form-control", style="width: 200px">
         <span asp-validation-for="UserHeight" class="col text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="UserWeight" class="text-dark font-weight-bold">Weight (kg)</label>
-        <input asp-for="UserWeight" class="form-control">
+        <input asp-for="UserWeight" class="form-control", style="width: 200px">
         <span asp-validation-for="UserWeight" class="col text-danger"></span>
     </div>
 
     <div class="form-group">
         <label asp-for="Gender" class="text-dark font-weight-bold">Gender (M/F)</label>
-        <select asp-for="Gender" class="form-control">
+        <select asp-for="Gender" class="form-control", style="width: 200px">
             <option>select a gender</option>
             <option value='M'>Male</option>
             <option value='F'>Female</option>
